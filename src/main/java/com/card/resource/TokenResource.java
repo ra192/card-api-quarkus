@@ -13,6 +13,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import java.security.NoSuchAlgorithmException;
 
 @Path("/api/token")
@@ -26,8 +27,8 @@ public class TokenResource {
     TokenService tokenService;
 
     @POST
-    @Consumes({"application/json"})
-    @Produces({"application/json"})
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     public TokenDto create(CreateTokenDto requestObj) throws MerchantException, TokenException, NoSuchAlgorithmException {
         logger.info("Create token method was called with params:");
         logger.info(requestObj.toString());

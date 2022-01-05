@@ -12,6 +12,7 @@ import org.jboss.logging.Logger;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 
 @Path("/api/card")
 public class CardResource extends WithAuthMerchantResource {
@@ -22,8 +23,8 @@ public class CardResource extends WithAuthMerchantResource {
 
     @POST
     @Path("/deposit")
-    @Consumes({"application/json"})
-    @Produces({"application/json"})
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     public TransactionDto deposit(@HeaderParam("Authorization") String authHeader, CreateCardTransactionDto requestObj) throws CardException, TransactionException, AccountException, MerchantException {
         logger.info("Card deposit method was called with params:");
         logger.info(requestObj.toString());
