@@ -6,6 +6,7 @@ import com.card.entity.TransactionItem;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 @ApplicationScoped
 public class TransactionItemRepository {
@@ -13,6 +14,7 @@ public class TransactionItemRepository {
     @Inject
     EntityManager em;
 
+    @Transactional
     public void save(TransactionItem transactionItem) {
         em.persist(transactionItem);
     }

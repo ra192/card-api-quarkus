@@ -12,9 +12,6 @@ public class MerchantRepository {
     EntityManager em;
 
     public Merchant find(Long id) {
-        final var merchant = new Merchant();
-        merchant.setId(id);
-
-        return em.find(Merchant.class, merchant);
+        return em.find(Merchant.class, id);
     }
 }

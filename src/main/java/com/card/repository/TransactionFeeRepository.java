@@ -7,6 +7,7 @@ import com.card.entity.enums.TransactionType;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 
 @ApplicationScoped
 public class TransactionFeeRepository {
@@ -14,10 +15,11 @@ public class TransactionFeeRepository {
     EntityManager em;
 
     public TransactionFee find(TransactionType type, Account account) {
-        final var fee = new TransactionFee();
-        fee.setType(type);
-        fee.setAccount(account);
-
-        return em.find(TransactionFee.class, fee);
+        try {
+            return (TransactionFee) em.createQuery("select fee from TransactionFee fee where fee.type=?1 and fee.account=?2")
+                    .setParameter(1, type).setParameter(2, account).getSingleResult();
+        } catch (NoResultException ex) {
+            return null;
+        }
     }
 }

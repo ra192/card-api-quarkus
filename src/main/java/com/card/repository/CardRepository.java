@@ -12,9 +12,6 @@ public class CardRepository {
     EntityManager em;
 
     public Card find(Long id) {
-        final var card = new Card();
-        card.setId(id);
-
-        return em.find(Card.class, card);
+        return em.find(Card.class, id);
     }
 }

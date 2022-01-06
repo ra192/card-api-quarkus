@@ -12,10 +12,7 @@ public class AccountRepository {
     EntityManager em;
 
     public Account find(Long id, Boolean active) {
-        final var account = new Account();
-        account.setId(id);
-        account.setActive(active);
-
-        return em.find(Account.class,account);
+        return (Account) em.createQuery("select acc from Account acc where acc.id=?1 and acc.active=?2")
+                .setParameter(1, id).setParameter(2, active).getSingleResult();
     }
 }
